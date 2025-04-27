@@ -1,0 +1,3 @@
+mcp-proxy --sse-host=0.0.0.0 --sse-port=5566 --allow-origin="*" -- go run .
+
+uv tool install git+https://github.com/sparfenyuk/mcp-proxy

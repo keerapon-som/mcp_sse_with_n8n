@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  n8n:
+    image: docker.n8n.io/n8nio/n8n
+    container_name: n8n
+    ports:
+      - "5678:5678"
+    environment:
+      - DB_TYPE=sqlite
+      - DB_SQLITE_VACUUM_ON_STARTUP=true
+      - N8N_HOST=localhost
+      - N8N_PORT=5678
+      - N8N_PROTOCOL=http
+      - NODE_ENV=production
+      - EXECUTIONS_PROCESS=main
+      - EXECUTIONS_DATA_SAVE_ON_ERROR=all
+      - EXECUTIONS_DATA_SAVE_MANUAL_EXECUTION=all
+      - GENERIC_TIMEZONE=UTC
+    volumes:
+      - ./rootdir:/home/node
+      - ./n8n:/home/node/.n8n
+    restart: unless-stopped
+    networks:
+      - mcp-network
+
+  yt-download-mcp:
+    image: yt-mcp:latest
+    environment:
+      - OUTPUT_DIR=./yimjud/eiei
+    volumes:
+      - /Users/keerapon.som/Desktop/Gem/Personal Gem/Road To Legendary Opensource Developer/mcp_sse_with_n8n/local_output_na:/app/yimjud/eiei
+    ports:
+      - 8877:1234
+    networks:
+      - mcp-network
+
+networks:
+  mcp-network:
+    driver: bridge
+
+volumes:
+  rootdir:
+  n8n_data:
+
+

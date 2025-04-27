@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  mcp-server:
+    image: yt-mcp:latest
+    environment:
+      - OUTPUT_DIR=./yimjud/eiei
+    volumes:
+      - /Users/keerapon.som/Desktop/Gem/Personal Gem/Road To Legendary Opensource Developer/mcp_sse_with_n8n/local_output_na:/app/yimjud/eiei
+    ports:
+      - 8877:1234
+    networks:
+      - mcp-network
+
+networks:
+  mcp-network:
+    driver: bridge
